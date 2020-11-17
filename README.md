@@ -25,7 +25,8 @@ To get started you need to put the TypeScript React app on your local machine (o
 *notes: move your change directory to your project directly*
 
 ```bash
-cd /projects
+mkdir ~/projects
+cd ~/projects
 git clone https://github.com/cbschuld/monoprice-multizone-interface.git
 cd monoprice-multizone-interface
 npm install
@@ -51,6 +52,7 @@ Notes -
 Now that your environment is updated you can build the App to get ready to ship it to the Raspberry Pi (where your API is located most likely).  Staying on the same machine run the following. From the folder monoprice-multizone-interface:
 
 ``` bash 
+cd ~projects/monoprice-multizone-interface
 npm run-script build
 ```
 
@@ -67,13 +69,14 @@ sudo chown -R pi:root /var/www/html
 In the monoprice-multizone-interface folder you will now see a `build` directory.  Copy that directory to the `/var/www/html` path on the Raspberry Pi.  In my case I built it on my local development machine and just used `scp` to copy the build directoy to the Pi.  *(Note: my Raspberry Pi is located at 10.0.0.82)*
 
 ```bash
-cd /projects/monoprice-multizone-interface
-scp -r * pi@10.0.0.82:/var/www/html/
+cd ~/projects/monoprice-multizone-interface
+scp -r build/* pi@10.0.0.82:/var/www/html/
 ```
 
 Notes - I run this on the same device running moode. I put the files in /var/www/audio and the static folder in /var/www/
 
 ```bash
+  cd ~/projects/monoprice-multizone-interface
   scp build/* :/var/www/audio/.
   scp -r build/static/* :/var/www/static/.
 ```
