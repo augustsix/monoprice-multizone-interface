@@ -33,14 +33,22 @@ npm install
 
 ### Adjust the Environment
 
-There is file in the root path called `env.sample.tsx`.  You will need to copy this file over as `env.tsx` and adjust this file to match your amplifier/controller setup before you go to the next step.  You will see in there that you can use custom icons for each zone/room.  I have included what I use in my sample image to help your setup.
+There is file `env.sample.tsx` in the src folder.  You will need to rename this file to `env.tsx` and adjust this file to match your amplifier/controller setup before you go to the next step.  You will see that you can use custom icons for each zone/room.  I have included what I use in my sample image to help your setup.
+
+Notes - 
+
+ The example has exterior and interior groups defined.
+ The export strings should have a LAN IP address - 127.0.0.1 doesn't seem to work even if serial app is on the same device.
+ export const HomeName: string = 'IP address';
+ export const HostName: string = 'IP address:8181';
+
 
 ### Build the App
 
-Now that your environment is updated you can build the App to get ready to ship it to the Raspberry Pi (where your API is located most likely).  Staying on the same machine run the following.
+Now that your environment is updated you can build the App to get ready to ship it to the Raspberry Pi (where your API is located most likely).  Staying on the same machine run the following. From the folder monoprice-multizone-interface:
 
-```bash
-npm build
+``` bash 
+npm run-script build
 ```
 
 ### Raspberry Pi - Installing the React App
@@ -53,12 +61,16 @@ sudo apt-get install nginx
 sudo chown -R pi:root /var/www/html
 ```
 
-Wherever you ran the `npm build` command you will now see a `build` directory.  Copy that directory to the `/var/www/html` path on the Raspberry Pi.  In my case I built it on my local development machine and just used `scp` to copy the build directoy to the Pi.  *(Note: my Raspberry Pi is located at 10.0.0.82)*
+In the monoprice-multizone-interface folder you will now see a `build` directory.  Copy that directory to the `/var/www/html` path on the Raspberry Pi.  In my case I built it on my local development machine and just used `scp` to copy the build directoy to the Pi.  *(Note: my Raspberry Pi is located at 10.0.0.82)*
 
 ```bash
 cd /projects/monoprice-multizone-interface
 scp -r * pi@10.0.0.82:/var/www/html/
 ```
+
+Notes - I run this on the same device running moode. I put the files in /var/www/audio and the static folder in /var/www/
+  scp build/* :/var/www/audio/.
+  scp -r build/static/* :/var/www/static/.
 
 ### View the App
 
