@@ -39,8 +39,11 @@ Notes -
 
  The example has exterior and interior groups defined.
  The export strings should have a LAN IP address - 127.0.0.1 doesn't seem to work even if serial app is on the same device.
+ 
+```bash
  export const HomeName: string = 'IP address';
- export const HostName: string = 'IP address:8181';
+ export const HostName: string = 'IP address where serial app lives:8181';
+ '''
 
 
 ### Build the App
@@ -69,8 +72,11 @@ scp -r * pi@10.0.0.82:/var/www/html/
 ```
 
 Notes - I run this on the same device running moode. I put the files in /var/www/audio and the static folder in /var/www/
+
+```bash
   scp build/* :/var/www/audio/.
   scp -r build/static/* :/var/www/static/.
+```
 
 ### View the App
 
