@@ -43,7 +43,7 @@ Notes -
 ```bash
  export const HomeName: string = 'IP address';
  export const HostName: string = 'IP address where serial app lives:8181';
- '''
+ ```
 
 
 ### Build the App
